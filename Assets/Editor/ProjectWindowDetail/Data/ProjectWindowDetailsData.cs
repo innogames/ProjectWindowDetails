@@ -10,7 +10,7 @@ namespace ProjectWindowDetail.Details {
 		const string SAVE_FILE_NOREZ =  "ProjectWindowSettings";
 		const string SAVE_FILE =        "ProjectWindowSettings.json";
 		const string SAVE_FILE_EDITORPREFS = "ProjectWindowDetail.Save";
-		const string SAVE_FILE_EDITORPREFS_DEFAULT = "ProjectWindowDetail/Data/ProjectWindowSettings.json";
+		const string SAVE_FILE_EDITORPREFS_DEFAULT = "Editor/ProjectWindowDetail/Data/ProjectWindowSettings.json";
 
 		public List<ProjectWindowDetailData> detailsData = new List<ProjectWindowDetailData>();
 
