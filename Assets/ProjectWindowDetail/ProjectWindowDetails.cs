@@ -19,6 +19,7 @@ namespace ProjectWindowDetail
 	public static class ProjectWindowDetails
 	{
 		private static readonly List<ProjectWindowDetailBase> _details = new List<ProjectWindowDetailBase>();
+		private static readonly ProjectWindowDetailsData detailsData;
 		private static GUIStyle _rightAlignedStyle;
 
 		private const int SpaceBetweenColumns = 10;
@@ -28,9 +29,12 @@ namespace ProjectWindowDetail
 		{
 			EditorApplication.projectWindowItemOnGUI += DrawAssetDetails;
 
-			foreach (var type in GetAllDetailTypes())
-			{
-				_details.Add((ProjectWindowDetailBase)Activator.CreateInstance(type));
+			detailsData = ProjectWindowDetailsData.LoadSettings();
+
+			foreach (var type in GetAllDetailTypes()) {
+				ProjectWindowDetailBase lastValue = (ProjectWindowDetailBase)Activator.CreateInstance(type);
+				_details.Add(lastValue);
+				detailsData.SetValueOrCreateNew(lastValue.Name, lastValue.Visible);
 			}
 		}
 
@@ -163,7 +167,9 @@ namespace ProjectWindowDetail
 			foreach (var detail in _details)
 			{
 				detail.Visible = false;
+				detailsData.SetValueOrCreateNew(detail.Name, detail.Visible);
 			}
+			ProjectWindowDetailsData.SaveSettings(detailsData);
 		}
 
 		private static void ShowAllDetails()
@@ -171,13 +177,17 @@ namespace ProjectWindowDetail
 			foreach (var detail in _details)
 			{
 				detail.Visible = true;
+				detailsData.SetValueOrCreateNew(detail.Name, detail.Visible);
 			}
+			ProjectWindowDetailsData.SaveSettings(detailsData);
 		}
 
 		public static void ToggleMenu(object data)
 		{
 			var detail = (ProjectWindowDetailBase) data;
 			detail.Visible = !detail.Visible;
+			detailsData.SetValueOrCreateNew(detail.Name, detail.Visible);
+			ProjectWindowDetailsData.SaveSettings(detailsData);
 		}
 
 		private static bool IsMainListAsset(Rect rect)
