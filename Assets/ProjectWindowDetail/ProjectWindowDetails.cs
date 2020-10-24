@@ -84,7 +84,7 @@ namespace ProjectWindowDetail
 
 			// Right align label and leave some space for the menu icon:
 			rect.x += rect.width;
-			rect.x -= MenuIconWidth;
+			rect.x -= MenuIconWidth * 0.9f;
 			rect.width = MenuIconWidth;
 
 			if (isSelected)
@@ -122,7 +122,6 @@ namespace ProjectWindowDetail
 
 		private static void DrawMenuIcon(Rect rect)
 		{
-			rect.y += 4;
 			var icon = EditorGUIUtility.IconContent("_Menu");
 			EditorGUI.LabelField(rect, icon);
 		}
@@ -154,6 +153,7 @@ namespace ProjectWindowDetail
 				menu.AddItem(new GUIContent(detail.Name), detail.Visible, ToggleMenu, detail);
 			}
 			menu.AddSeparator("");
+			menu.AddItem(new GUIContent("All"), false, ShowAllDetails);
 			menu.AddItem(new GUIContent("None"), false, HideAllDetails);
 			menu.DropDown(new Rect(Vector2.zero, Vector2.zero));
 		}
@@ -163,6 +163,14 @@ namespace ProjectWindowDetail
 			foreach (var detail in _details)
 			{
 				detail.Visible = false;
+			}
+		}
+
+		private static void ShowAllDetails()
+		{
+			foreach (var detail in _details)
+			{
+				detail.Visible = true;
 			}
 		}
 
