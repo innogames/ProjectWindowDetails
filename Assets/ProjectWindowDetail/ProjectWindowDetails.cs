@@ -123,7 +123,7 @@ namespace ProjectWindowDetail
 		private static void DrawMenuIcon(Rect rect)
 		{
 			rect.y += 4;
-			var icon = EditorGUIUtility.IconContent("d_LookDevPaneOption");
+			var icon = EditorGUIUtility.IconContent("_Menu");
 			EditorGUI.LabelField(rect, icon);
 		}
 
