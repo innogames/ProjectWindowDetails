@@ -10,7 +10,7 @@ namespace ProjectWindowDetail.Details {
 		const string SAVE_FILE_NOREZ =  "ProjectWindowSettings";
 		const string SAVE_FILE =        "ProjectWindowSettings.json";
 		const string SAVE_FILE_EDITORPREFS = "ProjectWindowDetail.Save";
-		const string SAVE_FILE_EDITORPREFS_DEFAULT = "Editor/ProjectWindowDetail/Data/ProjectWindowSettings.json";
+		const string SAVE_FILE_EDITORPREFS_DEFAULT = "Editor/Setting/ProjectWindowSettings.json";
 
 		public List<ProjectWindowDetailData> detailsData = new List<ProjectWindowDetailData>();
 
@@ -66,7 +66,11 @@ namespace ProjectWindowDetail.Details {
 			string savePath = Path.Combine(Application.dataPath, PlayerPrefs.GetString(SAVE_FILE_EDITORPREFS, SAVE_FILE_EDITORPREFS_DEFAULT));
 
 			if (!File.Exists(savePath)) {
-				return new ProjectWindowDetailsData();
+				string json = "{ \"detailsData\": [ { \"name\": \"Animation Key Count\", \"visible\": true }, { \"name\": \"Animation Length\", \"visible\": true }, { \"name\": \"Asset Type\", \"visible\": true }, { \"name\": \"File Size\", \"visible\": true }, { \"name\": \"File Suffix\", \"visible\": true }, { \"name\": \"Guid\", \"visible\": false }, { \"name\": \"Path\", \"visible\": false }, { \"name\": \"Texture Format\", \"visible\": true }, { \"name\": \"Texture Size\", \"visible\": true }, { \"name\": \"Texture Wrap Mode\", \"visible\": true } ] }";
+
+				ProjectWindowDetailsData data = JsonUtility.FromJson<ProjectWindowDetailsData>(json);
+				ProjectWindowDetailsData.SaveSettings(data);
+				return data;
 			}
 			else {
 				string json = File.ReadAllText(savePath);
