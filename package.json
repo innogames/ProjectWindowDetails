@@ -1,6 +1,6 @@
 {
   "name": "com.teamon.projectwindowdetails",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Project Window Details",
   "description": "Unity Editor extension to add columns into the project window for showing additional information about assets",
   "unity": "2019.1",
