@@ -1,0 +1,19 @@
+{
+  "name": "com.teamon.projectwindowdetails",
+  "version": "1.0.1",
+  "displayName": "Project Window Details",
+  "description": "Unity Editor extension to add columns into the project window for showing additional information about assets",
+  "unity": "2019.1",
+  "unityRelease": "0b1",
+  "type": "tool",
+  "keywords": [
+    "attribute",
+    "project",
+    "editor"
+  ],
+  "author": {
+    "name": "Team",
+    "email": "timonsol13@gmail.com",
+    "url": "https://github.com/Team-on"
+  }
+}
